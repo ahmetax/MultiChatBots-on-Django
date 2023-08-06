@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}
+    Bots - {{ block.super }}
+{% endblock %}
+
+{% block body %}
+{% include 'bots/alt_menu.html' %}
+<center>
+    <div class="container-fluid" style="margin-top: 10px;">
+        <h1 style="text-align: center;">LIST OF BOTS ({{ toplam }})</h1>
+            
+        <table class="table table-responsive table-striped table-bordered w-100 d-block d-md-table">
+            <thead class="thead-dark">
+                <!-- ['id','tarih','gonullu','ilce','mahalle','sokak','adet','arac'] -->
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title<br>Content</th>
+                    <th scope="col">Keywords</th>
+                    <th scope="col">Category<br>Watched</th>
+                    <th scope="col">Notes</th>
+                    <th scope="col">Link<br>LocalLink</th>
+                    <th scope="col">Counter</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Created_at
+                    <br>Updated_at</th>
+                    <th scope="col">Commands</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ['id','title','link','detail','image','priority'] -->
+                {% for bot in bot_list %}
+                <tr>
+                    <td style="width:80px;">{{ bot.id }}</td>
+                    <td>{{ bot.title }}<br>{{ bot.content|safe }}</td>
+                    <td>{{ bot.keywords }}</td>
+                    <td>{{ bot.category }}<br>{{ bot.watched }}</td>
+                    <td>{{ bot.notes|safe}}</td>
+                    <td>{{ bot.link }}<br>{{ bot.local }}</td>
+                    <td>{{ bot.counter }}</td>
+                    
+                    <td style="width:60px;">
+                        {% if bot.image %}
+                        <img src="{% thumbnail bot.image 100x100 crop %}" class="img-responsive">
+                        {% endif %}
+                    </td>
+                    <td>{{ bot.user }}</td>
+                    <td style="width:180px;">{{ bot.created_at|date:"d-m-Y H:i:s"}}
+                    <br>{{ bot.updated_at|date:"d-m-Y H:i:s"}}</td>
+                    <td>
+                        <div class="btn-group-justified">
+                            <a href="{% url 'bot_detail' pk=bot.pk %}"
+                            title="Bot Detail">
+                                <img src="{% static 'icons/details.png' %}" style="height:20px; display: inline-block">
+                            </a>
+                            <a href="{% url 'bot_update' pk=bot.pk %}"
+                            title="Mylink Update">
+                                <img src="{% static 'icons/edit.png' %}" style="height:20px; display: inline-block">
+                            </a>
+                            <a href="{% url 'bot_delete' pk=bot.pk %}"
+                            title="Mylink Delete">
+                                <img src="{% static 'icons/delete.png' %}" style="height:20px; display: inline-block">
+                            </a>
+
+                        </div>
+
+                    </td>
+                </tr>
+                {% endfor %}
+
+                {% if is_paginated %}
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; İlk</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Sayfa {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+        
+{% endblock %}

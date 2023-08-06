@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}
+  {{ object.tarih }}
+{% endblock title %}
+
+{% block body %}
+
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+<center>
+<h1></td><td>Multibots {{ object.title }}</h1>
+<table>
+<tr><td><strong>Content    </strong></td><td>{{ object.content|linebreaks }}</td></tr>
+<tr><td><strong>Keywords   </strong></td><td>{{ object.keywords }}</td></tr>
+<tr><td><strong>Category    </strong></td><td>{{ object.category }}</td></tr>
+<tr><td><strong>Notes    </strong></td><td>{{ object.notes|linebreaks }}</td></tr>
+<tr><td><strong>Link    </strong></td><td>{{ object.link }}</td></tr>
+<tr><td><strong>LocalLink    </strong></td><td>{{ object.local }}</td></tr>
+<tr><td><strong>Counter  </strong></td><td>{{ object.counter }}</td></tr>
+<tr><td><strong>Image  </strong></td><td>
+  {% if object.image %}
+  <a href="{{ object.image.url }}" target="_blank">
+  <img src="{% thumbnail object.image 80x100 crop %}" class="img-responsive"></a>
+  {% else %}
+  {{ object.image }}
+  {% endif %}
+
+</td></tr>
+<tr><td><strong>Priority  </strong></td><td>{{ object.priority }}</td></tr>
+</table>
+
+  <p class="pt-2">
+    <a href="{% url 'bot_update' pk=bot.pk %}" role="button" class="btn btn-primary w-40">Bot Update</a>
+    <a href="{% url 'bot_home_view' %}" role="button" class="btn btn-secondary w-40">Homepage</a>
+    <a href="{% url 'bot_list' %}" role="button" class="btn btn-secondary w-40">List of Bots</a>
+</p>
+
+</center>
+{% endblock body %}

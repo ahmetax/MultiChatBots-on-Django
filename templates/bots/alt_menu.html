@@ -1,0 +1,53 @@
+
+<div class="container-fluid mx-10 bordered">
+    <div class=" position:fixed; top:0;">
+    <center>
+        <form action="" method="GET">
+            {% csrf_token %}
+            <span>
+            <!-- <input type="button" value="Show Filters" id="bt" onclick="toggleFilters(this)"> -->
+            <b style="font-size:x-large;"> BOTS </b>&nbsp;&nbsp;&nbsp;
+            Search: {% if request.GET.qq %}
+                <input type="text" name="qq" style="color:red;" placeholder="Search in the Table" value="{{ request.GET.qq}}" >&nbsp;
+            {% else %}
+                <input type="text" name="qq" placeholder='Search in the Table' value="{{ request.GET.qq}}" >&nbsp;
+            {% endif %}
+            {% for field in filtrele.form %}
+                    {% if  'tarih1' == field.name %}
+                Baş. tarihi (yyyy-mm-dd): <span style="color:red;">{{field}}</span>
+                    {% endif %}
+            {% endfor %}
+            &nbsp;&nbsp;&nbsp;
+            {% for field in filtrele.form %}
+                    {% if  'tarih2' == field.name %}
+                Bit. tarihi (yyyy-mm-dd): <span style="color:red;">{{field}}</span>
+                    {% endif %}
+            {% endfor %}
+            Today: {% now "Y-m-d" %} {% now "D" %}
+           
+            Total Record Count={{ toplam }}&nbsp;
+            <button type="submit" name="btSubmit" value="Submit" class="btn btn-primary" onclick="startSpinner(5000)"> Filter Records </button>
+            
+            {% if request.path == '/bots/' %}
+                <a href="{% url 'bot_remove_home_filters' %}">
+            {% else %}
+                <a href="{% url 'bot_remove_list_filters' %}">
+            {% endif %}
+            <button type="button" value="Clear Filter" class="btn btn-primary" onclick="startSpinner(5000)"> Clear Filter </button></a>
+            <a href="{% url 'bot_create' %}">
+            <button type="button" value="Yeni" class="btn btn-primary" onclick="startSpinner(5000)"> Create New Bot Record </button></a>
+        
+            <button type="button" class="btn btn-primary" disabled> &nbsp; </button>
+                <a href="#bottom" class="btn btn-primary"> End of Page </a>
+            </span>
+            <a href="{% url 'bot_list' %}">
+                <button type="button" value="List of Bots" class="btn btn-primary" onclick="startSpinner(5000)"> List of Bots </button></a>
+             
+            <a href="{% url 'bot_home_view' %}">
+                <button type="button" value="Bots Home" class="btn btn-primary" onclick="startSpinner(5000)"> Bots Home </button></a>
+                 
+            </span>
+        </form>
+</center>
+    </div>
+</div>

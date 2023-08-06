@@ -1,0 +1,4 @@
+Django==4.2.4
+easy-thumbnails==2.8.5
+django-import-export==3.2.0
+

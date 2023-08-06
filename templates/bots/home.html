@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Bots - {{ block.super }}
+{% endblock %}
+
+{% block body %}
+{% include 'bots/alt_menu.html' %}
+<div class="container-fluid">
+    {% for bot in bots %}
+        {% if forloop.counter0|divisibleby:8 %} 
+        <div class="row text-center"> 
+        {%  endif %}
+        <div class="card p-0" style="width:12.5%">
+
+            {% if bot.link %}
+                <a href="{% url 'link_clicked' pk=bot.pk %}" target="_blank" rel="noopener noreferrer">
+            {% else %}
+                <a href="{% url 'bot_detail' pk=bot.pk %}" target="_blank" rel="noopener noreferrer">
+            {% endif %}
+            <div class="opacity70">
+                <div class="p-10 m-10 " style="background-color: rgba(0,0,255,.1)">
+                    <div class="card-body text-center p-1">
+                        {% if bot.image %}
+                            <div class="embed-responsive embed-responsive-1by1">
+                                <img class="card-img-top embed-responsive-item" src="{{ bot.image.url }}" alt="image">
+                            </div>
+                        {% else %}
+                            <img class="card-img-top" src="/media/images/bots.png">
+                        {% endif %}
+
+                        <div class="card-img-overlay">
+                            <div style="color:#002000;background-color:skyblue;opacity:0.6;">
+                                <b>{{bot.title}}</b><br>
+                            </div>
+                        </div>
+
+                    </div> <!--card-body-->
+                </div> <!-- card -->
+            </div><!--opacity70-->
+            </a>
+
+            <div class="opacity30" style="position:absolute; bottom:8px; right:30px; left: 30px;z-index:100;">
+                {{bot.counter}}</a>
+            </div>
+            <div class="opacity30" style="position:absolute; bottom:8px; left:8px;z-index:10;">
+                <a href="{% url 'bot_detail' pk=bot.pk %}"><img src="{% static 'icons/details.png' %}" style="display: inline-block; opacity:0.3;"></a>
+            </div>
+            <div class="opacity30" style="position:absolute; bottom:8px; right:8px; ">
+                <a href="{% url 'bot_update' pk=bot.pk %}"> <img src="{% static 'icons/edit.png' %}" style="height:24px;display: inline-block; opacity:0.3;"></a>
+            </div>
+                     
+        </div> <!--card-->
+        {%  if forloop.counter|divisibleby:8 or forloop.last %}</div><!-- row closing -->{%  endif %}
+    {% endfor %}
+
+    </div>
+</div><!-- class: container-fluid -->
+
+
+{% endblock %}
+

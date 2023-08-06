@@ -1,0 +1,58 @@
+{% load static %}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" role="banner">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <div>
+    <a class="navbar-brand mt-20" href=""
+    title="Multibots">
+      <img src="{% static 'images/multibots.png' %}"
+           height="20"
+           alt=""
+           loading="lazy"
+      />Multibots-sqlite3 v0.0.1
+    </a>
+    </div>
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-20 mt-lg-0" href="">
+              <img src="{% static 'images/mylinks.png' %}"
+                   height="24"
+                   alt="logo"
+                   loading="lazy"
+              />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mt-20 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Admin</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <div class="navbar mt-20">
+      <ul class="navbar-nav mt-20">      
+        <li><a class="nav-link nav-item"
+            href="{% url 'bot_list' %}" target="_blank">Bots</a></li>
+
+        {% if not request.user.is_authenticated %}
+            <li>
+              <a class="nav-link nav_item adjust-height" href="{% url 'login_view' %}">Login</a>
+            </li>
+        {% else %}
+            <li><a class="nav-link nav_item adjust-height" href="#">{{user.username}}</a></li>
+            <li>
+              <a class="nav-link nav_item adjust-height" href="{% url 'logout_view' %}">Logout</a>
+            </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+

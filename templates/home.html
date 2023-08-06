@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container-fluid">
+    {% for mylink in mylinks %}
+    {% if forloop.counter0|divisibleby:12 %} <div class="row text-center"> {%  endif %}
+        <div class="col-md-1 p-1">
+            <a href="{{mylink.link}}" target="_blank" rel="noopener noreferrer">
+            <div class="card p-1 h-100" style="background-color: rgba(0,0,255,.1)">
+                <div class="card-body text-center p-0">
+                    {% if mylink.image %}
+                        <img class="card-img-top" src="{{ mylink.image.url }}" alt="C">
+                    {% else %}
+                        <img class="card-img-top" src="/media/images/mylinks.png" alt="X">
+                    {% endif %}
+                    <div class="card-img-overlay">
+                        <div style="color:#ffffff;">{{mylink.title}}</div>
+                    </div>
+                </div>
+            </a>
+            </div>
+        </div>
+    {%  if forloop.counter|divisibleby:12 or forloop.last %}</div><!-- row closing -->{%  endif %}
+    {% endfor %}
+
+    </div>
+</div><!-- class: container-fluid -->
+
+
+{% endblock %}
+
