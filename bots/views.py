@@ -41,7 +41,6 @@ def home_view(request):
     else:
         pass
 
-    # bots = Bot.objects.filter(watched=False)
     bots = Bot.objects.all()
     form = BotFilterForm(request.GET or None)
     bots, form = gen_sorgula(request, form, bots)
