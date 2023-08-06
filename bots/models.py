@@ -21,7 +21,7 @@ class Bot(models.Model):
     link = models.CharField(max_length=250, verbose_name='Link', blank=True, null=True)
     local = models.CharField(max_length=250, verbose_name='LocalLink', blank=True, null=True)
     counter = models.IntegerField(verbose_name='Counter', default=0)
-    category = models.ForeignKey(Category, default=DEFAULT_CATEGORY, on_delete=models.DO_NOTHING, blank=True)
+    category = models.ForeignKey(Category, default=DEFAULT_CATEGORY, on_delete=models.DO_NOTHING, blank=True, null=True)
     notes = models.TextField(verbose_name='Notes', blank=True, null=True)
     image = models.ImageField(verbose_name='Image', blank=True)
     created_at = models.DateTimeField(editable=False)
