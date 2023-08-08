@@ -34,6 +34,9 @@ That project also might be a simple starting point to learn Django.
 ## RUN
 - python manage.py runserver
 
+## DOCKER RUN
+- docker-compose up
+
 
 # MULTICHATBOTS DJANGO PROJESİ
 
@@ -70,4 +73,8 @@ Bu proje aynı zamanda Django'yu öğrenmek için basit bir başlangıç noktas�
 
 ## ÇALIŞTIRMA
 - python manage.py runserver
+
+## DOCKER İLE ÇALIŞTIRMA
+- docker-compose up
+
 
