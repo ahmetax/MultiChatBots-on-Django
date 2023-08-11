@@ -12,6 +12,7 @@ db-2023*
 media/
 bots/migrations/
 bots/__pycache__/
+temp/
 
 orca_mini_3B-GGML/
 # Byte-compiled / optimized / DLL files

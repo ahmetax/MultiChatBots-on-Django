@@ -1,6 +1,20 @@
 from django.db.models import Q, F
 import operator
 from functools import reduce
+from django.conf import settings
+import os
+
+def create_temp_and_user_if_not_exists(request):
+    user = request.user.username
+    temp_dir='temp/'
+    user_dir = f"{temp_dir}/{user}/"
+    # print(temp_dir,user_dir)
+    if os.path.exists(user_dir):
+        return
+    if not os.path.exists(temp_dir):
+        os.mkdir(temp_dir)
+    if not os.path.exists(user_dir):
+        os.mkdir(user_dir)
 
 def gen_sorgula(request, form, satirlar):
     # print()

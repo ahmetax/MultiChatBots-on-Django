@@ -13,13 +13,12 @@
         <div class="row text-center"> 
         {%  endif %}
         <div class="card p-0" style="width:12.5%">
-
             {% if bot.link %}
                 <a href="{% url 'link_clicked' pk=bot.pk %}" target="_blank" rel="noopener noreferrer">
             {% else %}
                 <a href="{% url 'bot_detail' pk=bot.pk %}" target="_blank" rel="noopener noreferrer">
             {% endif %}
-            <div class="opacity70">
+            <div class="opacity100">
                 <div class="p-10 m-10 " style="background-color: rgba(0,0,255,.1)">
                     <div class="card-body text-center p-1">
                         {% if bot.image %}

@@ -14,11 +14,13 @@ from datetime import datetime
 from .models import Bot
 from .forms import BotForm, BotFilterForm
 from multibots.gen_filter import gen_sorgula
+from multibots.gen_filter import create_temp_and_user_if_not_exists
 
 def home_view(request):
     if request.method == 'GET':
         query = request.GET
         pklfile = f'temp/{request.user}/bot.pkl'
+        create_temp_and_user_if_not_exists(request)
         if len(query) > 0:
             # eğer ExcelResponse çağrıldıysa, pkl kaydetme!
             if request.GET.get('Filtre') == 'Export':

@@ -4,12 +4,12 @@
 <center>
 <form method="POST">{% csrf_token %}
     <h2><b>DİKKAT!!!</b></h2>
-    <h3>{{object.id }}
+    <h3>{{object.id }}8
         {{ object.title }}
         {{ object.link }}
-        kaydını tamamiyle silmek istediğinizden emin misiniz?</h3>
+        Are you sure to delete the record completely?</h3>
     <p>
-        <input class="btn btn-danger" type="submit" value = "Evet, eminim!" />
+        <input class="btn btn-danger" type="submit" value = "Yes, I'm sure!" />
         <a href="{% url 'home_view' %}" role="button" class="btn btn-secondary mb-1">Homepage</a>
         <a href="{% url 'bot_list' %}" role="button" class="btn btn-secondary">List of Bots</a>
     </p>
